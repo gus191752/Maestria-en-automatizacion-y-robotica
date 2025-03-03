@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<truthTable>
+  <variables>
+    <variable name="memori"/>
+    <variable name="nivel_bajosub"/>
+    <variable name="nivel_bajo_aereo"/>
+    <variable name="nivel_alto_aereo"/>
+    <variable name="sensor_temperatura"/>
+  </variables>
+  <results>
+    <result>
+      <name>bomba</name>
+      <values class="BoolTable">00001000000000001000100000000000</values>
+    </result>
+    <result>
+      <name>fallo</name>
+      <values class="BoolTable">00000101000000000100010000000000</values>
+    </result>
+    <result>
+      <name>memoria</name>
+      <values class="BoolTable">00001010000000001100111010001000</values>
+    </result>
+  </results>
+</truthTable>
