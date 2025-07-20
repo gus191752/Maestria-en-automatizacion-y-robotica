@@ -233,4 +233,8 @@ def plot_robot_3d(thetas):
     plt.tight_layout()
     plt.show()
 
+    
+
+    
+
 plot_robot_3d(thetas)
