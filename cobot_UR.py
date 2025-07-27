@@ -148,9 +148,9 @@ def inverse_kinematics(T_deseada):
 posicion_deseada = [450, 430, 460]  # x, y, z
 
 # Definir orientación deseada en ángulos RPY (radianes)
-roll_deseado = pi/2    # Rotación alrededor del eje X
-pitch_deseado = 0      # Rotación alrededor del eje Y (90° hacia abajo)
-yaw_deseado = -pi/2       # Rotación alrededor del eje Z
+roll_deseado =   pi/2    # Rotación alrededor del eje X
+pitch_deseado =  pi/8    # Rotación alrededor del eje Y (90° hacia abajo)
+yaw_deseado =   -pi/2    # Rotación alrededor del eje Z
 
 # Crear matriz de transformación deseada
 T_deseada = create_target_matrix(
