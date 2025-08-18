@@ -10,18 +10,17 @@ pin_Direccion = Pin(GPIO_PIN_DIRECCION, Pin.OUT)     # Pin asignado para direcci
 pin_habilita = Pin(GPIO_PIN_ENABLE, Pin.OUT)         # Pin asignado para habilitar
 pin_Direccion.value(1)                               # Coloca el pin de direccion en HIGH
 pin_habilita.value(1)                                # Coloca el pin de habilitado en HIGH
-MIN_FREQ = 55                                         # Frecuencia mínima (inicio de rampa)
+MIN_FREQ = 20                                        # Frecuencia mínima (inicio de rampa)
 MAX_FREQ = 500                                       # Frecuencia máxima (frecuencia objetivo)
 TOTAL_PULSES = 400                                   # Número total de pulsos a generar
 RAMP_RATIO = 0.05                                    # Proporción de pulsos para aceleración/frenado (30%)
 
 def generate_pulse_with_ramps():
     try:
-        #pin_Pulsos = Pin(GPIO_PIN_PULSOS, Pin.OUT)                         # Pin asignado para generar el pulso
         ramp_pulses = int(TOTAL_PULSES * RAMP_RATIO)         # Total de pulsos de la rampa
         constant_pulses = TOTAL_PULSES - 2 * ramp_pulses     # Total de pulsos de la velocidad constante
         
-        print(f"Iniciando generación de {TOTAL_PULSES} pulsos con rampas (1-55Hz)...")
+        print(f"Iniciando generación de {TOTAL_PULSES} pulsos con rampas ...")
         print(f"Distribución: {ramp_pulses} pulsos aceleración, {constant_pulses} constantes, {ramp_pulses} frenado")
 
         # 1. Fase de Aceleración
