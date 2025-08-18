@@ -5,7 +5,7 @@ import time
 GPIO_PIN_PULSOS = 21                                 # Pin GPIO a usar
 GPIO_PIN_DIRECCION=22                                # Pin GPIO de direccion
 GPIO_PIN_ENABLE= 18                                  # Pin GPIO de Habilitacion
-pin_Pulsos = Pin(GPIO_PIN_PULSOS, Pin.OUT)                  # Pin asignado para generar el tren de pulsos
+pin_Pulsos = Pin(GPIO_PIN_PULSOS, Pin.OUT)           # Pin asignado para generar el tren de pulsos
 pin_Direccion = Pin(GPIO_PIN_DIRECCION, Pin.OUT)     # Pin asignado para direccion
 pin_habilita = Pin(GPIO_PIN_ENABLE, Pin.OUT)         # Pin asignado para habilitar
 pin_Direccion.value(1)                               # Coloca el pin de direccion en HIGH
@@ -17,8 +17,8 @@ RAMP_RATIO = 0.05                                    # Proporción de pulsos par
 
 def generate_pulse_with_ramps():
     try:
-        ramp_pulses = int(TOTAL_PULSES * RAMP_RATIO)         # Total de pulsos de la rampa
-        constant_pulses = TOTAL_PULSES - 2 * ramp_pulses     # Total de pulsos de la velocidad constante
+        ramp_pulses = int(TOTAL_PULSES * RAMP_RATIO)                      # Total de pulsos de la rampa
+        constant_pulses = TOTAL_PULSES - 2 * ramp_pulses                  # Total de pulsos de la velocidad constante
         
         print(f"Iniciando generación de {TOTAL_PULSES} pulsos con rampas ...")
         print(f"Distribución: {ramp_pulses} pulsos aceleración, {constant_pulses} constantes, {ramp_pulses} frenado")
@@ -26,29 +26,29 @@ def generate_pulse_with_ramps():
         # 1. Fase de Aceleración
         print("\n>>> Fase de Aceleración <<<")
         for i in range(ramp_pulses):
-            progress = i / ramp_pulses                                     # Calcula progreso (0.0 a 1.0)
-            current_freq = MIN_FREQ + (MAX_FREQ - MIN_FREQ) * progress     # Frecuencia creciente
-            half_period = 0.5 / current_freq                               # Calcula semiperiodo
+            progress = i / ramp_pulses                                    # Calcula progreso (0.0 a 1.0)
+            current_freq = MIN_FREQ + (MAX_FREQ - MIN_FREQ) * progress    # Frecuencia creciente
+            half_period = 0.5 / current_freq                              # Calcula semiperiodo
             # Genera el pulso
             pin_Pulsos.value(1)
             time.sleep(half_period)
             pin_Pulsos.value(0)
             time.sleep(half_period)
             
-            if (i + 1) % max(1, ramp_pulses//10) == 0:  # 10 divisiones durante la rampa
+            if (i + 1) % max(1, ramp_pulses//10) == 0:                    # 10 divisiones durante la rampa
                 print(f"Pulso {i+1}/{ramp_pulses} | Frec: {current_freq:.1f}Hz")
 
         # 2. Fase a Frecuencia Constante
         print("\n>>> Fase Constante <<<")
-        half_period = 0.5 / MAX_FREQ                           # Calcula semiperiodo
-        for i in range(constant_pulses):                       # Periodo fijo para la velocidad constante
+        half_period = 0.5 / MAX_FREQ                                      # Calcula semiperiodo
+        for i in range(constant_pulses):                                  # Periodo fijo para la velocidad constante
             # Genera el pulso
             pin_Pulsos.value(1)
             time.sleep(half_period)
             pin_Pulsos.value(0)
             time.sleep(half_period)
             
-            if (i + 1) % max(1, constant_pulses//10) == 0:  # 10 updates durante fase constante
+            if (i + 1) % max(1, constant_pulses//10) == 0:                # 10 updates durante fase constante
                 print(f"Pulso {ramp_pulses+i+1}/{TOTAL_PULSES} | Frec: {MAX_FREQ}Hz")
 
         # 3. Fase de Frenado
