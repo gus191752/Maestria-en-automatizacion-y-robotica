@@ -74,7 +74,7 @@ def generate_pulse_with_ramps():
         print("\nGeneración interrumpida por el usuario")
     finally:
         pin.value(0)
-        print("Pin limpiado y sistema detenido")
+        print("Pin limpiado y sistema detenido ")
 
 if __name__ == "__main__":
     generate_pulse_with_ramps()
