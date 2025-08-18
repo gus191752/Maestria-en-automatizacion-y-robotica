@@ -36,7 +36,7 @@ def generate_pulse_with_ramps():
             pin_Pulsos.value(0)
             time.sleep(half_period)
             
-            if (i + 1) % max(1, ramp_pulses//10) == 0:  # 10 updates durante la rampa
+            if (i + 1) % max(1, ramp_pulses//10) == 0:  # 10 divisiones durante la rampa
                 print(f"Pulso {i+1}/{ramp_pulses} | Frec: {current_freq:.1f}Hz")
 
         # 2. Fase a Frecuencia Constante
@@ -64,7 +64,7 @@ def generate_pulse_with_ramps():
             pin_Pulsos.value(0)
             time.sleep(half_period)
             
-            if (i + 1) % max(1, ramp_pulses//10) == 0:  # 10 updates durante frenado
+            if (i + 1) % max(1, ramp_pulses//10) == 0:  # 10 divisiones durante frenado
                 pulse_count = ramp_pulses + constant_pulses + i + 1
                 print(f"Pulso {pulse_count}/{TOTAL_PULSES} | Frec: {current_freq:.1f}Hz")
 
