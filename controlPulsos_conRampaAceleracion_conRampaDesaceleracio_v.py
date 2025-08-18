@@ -5,12 +5,12 @@ import time
 GPIO_PIN_PULSOS = 21                                 # Pin GPIO a usar
 GPIO_PIN_DIRECCION=22                                # Pin GPIO de direccion
 GPIO_PIN_ENABLE= 18                                  # Pin GPIO de Habilitacion
-pin_Pulsos = Pin(GPIO_PIN, Pin.OUT)                  # Pin asignado para generar el tren de pulsos
+pin_Pulsos = Pin(GPIO_PIN_PULSOS, Pin.OUT)                  # Pin asignado para generar el tren de pulsos
 pin_Direccion = Pin(GPIO_PIN_DIRECCION, Pin.OUT)     # Pin asignado para direccion
 pin_habilita = Pin(GPIO_PIN_ENABLE, Pin.OUT)         # Pin asignado para habilitar
 pin_Direccion.value(1)                               # Coloca el pin de direccion en HIGH
 pin_habilita.value(1)                                # Coloca el pin de habilitado en HIGH
-MIN_FREQ = 1                                         # Frecuencia mínima (inicio de rampa)
+MIN_FREQ = 55                                         # Frecuencia mínima (inicio de rampa)
 MAX_FREQ = 500                                       # Frecuencia máxima (frecuencia objetivo)
 TOTAL_PULSES = 400                                   # Número total de pulsos a generar
 RAMP_RATIO = 0.05                                    # Proporción de pulsos para aceleración/frenado (30%)
@@ -73,8 +73,8 @@ def generate_pulse_with_ramps():
     except KeyboardInterrupt:
         print("\nGeneración interrumpida por el usuario")
     finally:
-        pin.value(0)
-        print("Pin limpiado y sistema detenido ")
+        pin_Pulsos.value(0)
+        print("Pin limpiado y sistema detenido")
 
 if __name__ == "__main__":
     generate_pulse_with_ramps()
