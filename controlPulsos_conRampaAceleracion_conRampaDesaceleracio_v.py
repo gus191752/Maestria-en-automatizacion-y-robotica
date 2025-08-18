@@ -72,8 +72,10 @@ def generate_pulse_with_ramps():
     except KeyboardInterrupt:
         print("\nGeneración interrumpida por el usuario")
     finally:
-        pin_Pulsos.value(0)
-        print("Pin limpiado y sistema detenido")
+        pin_Pulsos.value(0)                                  # Coloca el pin de tren de pulsos en LOW
+        pin_Direccion.value(0)                               # Coloca el pin de direccion en LOW
+        pin_habilita.value(0)                                # Coloca el pin de enable en LOW
+        print("Pin limpiado y sistema detenido")       
 
 if __name__ == "__main__":
     generate_pulse_with_ramps()
