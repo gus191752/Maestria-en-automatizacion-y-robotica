@@ -63,7 +63,7 @@ def generate_pulse_with_ramps():
             pin_Pulsos.value(0)
             time.sleep(half_period)
             
-            if (i + 1) % max(1, ramp_pulses//10) == 0:  # 10 divisiones durante frenado
+            if (i + 1) % max(1, ramp_pulses//10) == 0:                    # 10 divisiones durante frenado
                 pulse_count = ramp_pulses + constant_pulses + i + 1
                 print(f"Pulso {pulse_count}/{TOTAL_PULSES} | Frec: {current_freq:.1f}Hz")
 
@@ -72,9 +72,9 @@ def generate_pulse_with_ramps():
     except KeyboardInterrupt:
         print("\nGeneración interrumpida por el usuario")
     finally:
-        pin_Pulsos.value(0)                                  # Coloca el pin de tren de pulsos en LOW
-        pin_Direccion.value(0)                               # Coloca el pin de direccion en LOW
-        pin_habilita.value(0)                                # Coloca el pin de enable en LOW
+        pin_Pulsos.value(0)                                               # Coloca el pin de tren de pulsos en LOW
+        pin_Direccion.value(0)                                            # Coloca el pin de direccion en LOW
+        pin_habilita.value(0)                                             # Coloca el pin de enable en LOW
         print("Pin limpiado y sistema detenido")       
 
 if __name__ == "__main__":
