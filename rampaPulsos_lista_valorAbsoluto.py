@@ -11,12 +11,11 @@ pin_Direccion = Pin(GPIO_PIN_DIRECCION, Pin.OUT)     # Pin asignado para direcci
 pin_habilita = Pin(GPIO_PIN_ENABLE, Pin.OUT)         # Pin asignado para habilitar
 pin_Direccion.value(1)                               # Coloca el pin de direccion en HIGH
 pin_habilita.value(1)                                # Coloca el pin de habilitado en HIGH
-MIN_FREQ = 20                                        # Frecuencia mínima (inicio de rampa)
-MAX_FREQ = 500                                       # Frecuencia máxima (frecuencia objetivo)
-#TOTAL_PULSES = 400                                   # Número total de pulsos a generar
+MIN_FREQ = 40                                        # Frecuencia mínima (inicio de rampa)
+MAX_FREQ = 400                                       # Frecuencia máxima (frecuencia objetivo)
 RAMP_RATIO = 0.05                                    # Proporción de pulsos para aceleración/frenado (30%)
 
-lista=[100,200,300,100,400,500,250]
+lista=[200,0,200,0,200,400,0]                  # Posicion absoluta 
 
 def generate_pulse_with_ramps():
     try:
@@ -75,9 +74,9 @@ def generate_pulse_with_ramps():
     except KeyboardInterrupt:
         print("\nGeneración interrumpida por el usuario")
     finally:
-        pin_Pulsos.value(0)                                               # Coloca el pin de tren de pulsos en LOW
-        pin_Direccion.value(0)                                            # Coloca el pin de direccion en LOW
-        pin_habilita.value(0)                                             # Coloca el pin de enable en LOW
+        #pin_Pulsos.value(0)                                               # Coloca el pin de tren de pulsos en LOW
+        #pin_Direccion.value(0)                                            # Coloca el pin de direccion en LOW
+        #pin_habilita.value(0)                                             # Coloca el pin de enable en LOW
         print("Pin limpiado y sistema detenido")       
 
 
@@ -86,27 +85,25 @@ valor_anterior = 0                           # Variable para almacenar el valor 
 for elemento in lista:                          # evalua cada item de la lista
     print(f"Ejecutando {elemento}")
     TOTAL_PULSES = elemento                     # asigna a la variable de TOTAL_PULSE en valor de cada item de la lista
-                                                # Comparación con el valor anterior
-
+                                               
     if TOTAL_PULSES > valor_anterior:
         print(f"ADVERTENCIA: El valor actual ({TOTAL_PULSES}) es MAYOR que el anterior ({valor_anterior})")
         PULSOS_ABSOLUTOS= abs(TOTAL_PULSES - valor_anterior)
         print(f"ADVERTENCIA: El valor de PULSOS_ABSOLUTOS es: ({PULSOS_ABSOLUTOS})")
-
-        pin_Direccion.value(1)              # Coloca el pin de enable en HIGH
-        print("Grira a la DERECHA")
+        pin_Direccion.value(1)                  # Coloca el pin de Direccion en HIGH
+        print("Gira a la DERECHA")
         
     elif TOTAL_PULSES < valor_anterior:
         print(f"INFO: El valor actual ({TOTAL_PULSES}) es MENOR que el anterior ({valor_anterior})")
         PULSOS_ABSOLUTOS= abs(- TOTAL_PULSES + valor_anterior)
         print(f"ADVERTENCIA: El valor de PULSOS_ABSOLUTOS es: ({PULSOS_ABSOLUTOS})")
-        pin_Direccion.value(0)              # Coloca el pin de enable en LOW
-        print("Grira a la IZQUIERDA")
+        pin_Direccion.value(0)                  # Coloca el pin de Direccion en LOW
+        print("Gira a la IZQUIERDA")
     else:
         print(f"El valor actual ({TOTAL_PULSES}) es IGUAL al anterior")
             
     generate_pulse_with_ramps()                 # Ejecuta la funcion de rampa
-    time.sleep(5)
+    time.sleep(0.05)
 
     valor_anterior = TOTAL_PULSES               # Actualizar el valor anterior para la próxima iteración
     
