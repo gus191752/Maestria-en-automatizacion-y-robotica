@@ -1,7 +1,6 @@
 from machine import Pin
 import time
 
-
 PULSOS_ABSOLUTOS=0
 
 # Configuración para la generacion de una rampa de aceleracion
@@ -15,9 +14,9 @@ pin_Direccion.value(1)                               # Coloca el pin de direccio
 pin_habilita.value(1)                                # Coloca el pin de habilitado en HIGH
 MIN_FREQ = 40                                        # Frecuencia mínima (inicio de rampa)
 MAX_FREQ = 400                                       # Frecuencia máxima (frecuencia objetivo)
-RAMP_RATIO = 0.5                                    # Proporción de pulsos para aceleración/frenado (30%)
+RAMP_RATIO = 0.5                                     # Proporción de pulsos para aceleración/frenado (30%)
 
-lista=[200,100,200,0,200,400,50]                        # Pulsos para obtener la Posicion absoluta 
+lista=[200,100,200,0,200,400,50]                     # Pulsos para obtener la Posicion absoluta 
 
 def generate_pulse_with_ramps():
     try:
