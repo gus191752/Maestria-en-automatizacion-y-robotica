@@ -15,9 +15,9 @@ pin_Direccion.value(1)                               # Coloca el pin de direccio
 pin_habilita.value(1)                                # Coloca el pin de habilitado en HIGH
 MIN_FREQ = 40                                        # Frecuencia mínima (inicio de rampa)
 MAX_FREQ = 400                                       # Frecuencia máxima (frecuencia objetivo)
-RAMP_RATIO = 0.05                                    # Proporción de pulsos para aceleración/frenado (30%)
+RAMP_RATIO = 0.5                                    # Proporción de pulsos para aceleración/frenado (30%)
 
-lista=[200,0,200,0,200,400,0]                        # Pulsos para obtener la Posicion absoluta 
+lista=[200,100,200,0,200,400,50]                        # Pulsos para obtener la Posicion absoluta 
 
 def generate_pulse_with_ramps():
     try:
@@ -102,7 +102,7 @@ for elemento in lista:                          # evalua cada item de la lista
         print(f"El valor actual ({TOTAL_PULSES}) es IGUAL al anterior")
             
     generate_pulse_with_ramps()                 # Ejecuta la funcion de rampa
-    time.sleep(0.05)
+    time.sleep(0.5)
 
     valor_anterior = TOTAL_PULSES               # Actualizar el valor anterior para la próxima iteración
     
